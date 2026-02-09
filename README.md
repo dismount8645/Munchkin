@@ -1,0 +1,1 @@
+# Kort vejledning til hvordan man kører programmet

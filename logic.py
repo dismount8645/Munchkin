@@ -1,0 +1,1 @@
+# Funktioner til kamp-beregning og regler
