@@ -1,1 +1,0 @@
-# Selve programmet og menu-loopet (Entry point)
