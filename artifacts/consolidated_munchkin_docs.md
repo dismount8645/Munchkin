@@ -1,21 +1,46 @@
-# Walkthrough: Munchkin Steampunk Logic Flowchart
+# Munchkin Steampunk: Consolidated Project Documentation
 
-I have generated a comprehensive Mermaid flowchart based on the rules defined in [game_plan.md](file:///home/jacob/Munchkin/game_plan.md).
+This document combines all architectural and logic artifacts for the Munchkin Steampunk implementation.
 
-## What Was Accomplished
+---
 
-- **Logic Extraction**: Analyzed the 4-phase turn structure and the combat resolution logic.
-- **Flowchart Generation**: Created a Mermaid diagram that visualizes the decision tree for:
-    - Kicking open the door (Curses vs. Monsters).
-    - Combat Strength calculation and comparison.
-    - Running Away logic (Die rolls and Escape bonuses).
-    - Phase 2 choices (Looking for Trouble vs. Looting the Room).
-    - Phase 4 Charity mechanics.
-    - Final Win Condition check (Level 10 from Monster Kill).
+## 1. Project Progress (Task Tracker)
 
-## Visual Representation: Turn Logic
+- [x] Analyze `game_plan.md` and define flowchart structure
+- [x] Convert Mermaid flowchart to pseudocode style
+- [x] Create self-guided implementation plan
+- [x] Refine flowchart to use natural human language
+- [x] Create Global Game Loop (Turn-to-Turn) flowchart
+- [x] Synchronize internal artifacts with project `artifacts` folder
 
-Below is the rendered flowchart for the Munchkin Steampunk turn logic:
+---
+
+## 2. Implementation Roadmap
+
+This plan provides a logical sequence for implementing the game based on [game_plan.md](file:///c:/Users/jacob/Munchkin/game_plan.md).
+
+### Phase 1: State Management & Entities
+- **Player State**: Tracking rank, mechanical bonuses, gear/items, and health.
+- **Opponent Structure**: Enemy power levels, rewards, and "Bad Stuff" penalties.
+- **Global State**: Turn management and deck maintenance.
+
+### Phase 2: Core Combat Logic
+- **Power Calculation**: Summing player bonuses vs. enemy power.
+- **Resolution**: Victory rewards vs. escape sequences.
+- **Escape Mechanics**: Die rolls and application of penalties.
+
+### Phase 3: The Turn Sequence (4-Phase Cycle)
+- **Phase 1 (Kick Open the Door)**: Encounter logic for curtains and monsters.
+- **Phase 2 (Empty Room)**: "Looking for Trouble" or "Looting the Room."
+- **Phase 4 (Cleanup)**: Charity and resource limits.
+
+### Phase 4: Advanced Systems
+- **Resource Conversion**: Gold trading for ranks.
+- **Inventory Management**: Gear slots and size restrictions.
+
+---
+
+## 3. Visual Reference: Turn Logic Flowchart
 
 ```mermaid
 flowchart TD
@@ -78,9 +103,9 @@ flowchart TD
     end
 ```
 
-## Visual Representation: Global Game Cycle
+---
 
-This flowchart shows how the game moves between players and the transitions "in between" each turn.
+## 4. Visual Reference: Global Game Cycle
 
 ```mermaid
 flowchart TD
@@ -107,9 +132,3 @@ flowchart TD
     
     NextPlayer -.-> Players
 ```
-
-## Reference Files
-
-- [munchkin_flow.md](file:///home/jacob/Munchkin/artifacts/munchkin_flow.md)
-- [game_cycle.md](file:///home/jacob/Munchkin/artifacts/game_cycle.md)
-- [implementation_plan.md](file:///home/jacob/Munchkin/artifacts/implementation_plan.md)
