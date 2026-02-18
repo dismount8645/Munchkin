@@ -1,4 +1,7 @@
 # -----------------------------
+
+
+# En ny kommentar
 # Player Class
 # -----------------------------
 class Player:
