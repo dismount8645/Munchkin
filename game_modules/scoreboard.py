@@ -2,6 +2,10 @@
 # SCOREBOARD
 # ============================
 def display_scoreboard(session):
+    """
+    Prints a formatted, tabular scoreboard displaying all players and their current stats
+    (Level, Combat Power, Gender, Class).
+    """
     if not session.startgame:
         print("Game has not started yet.")
         return
