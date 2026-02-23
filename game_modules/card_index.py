@@ -2,6 +2,7 @@
 # CARD INDEX
 # ============================
 
+# Dictionary defining the abilities available for each character class
 class_cards = {
     "Explorer": {
         "abilities": [
@@ -29,6 +30,7 @@ class_cards = {
     }
 }
 
+# Dictionary of available monsters, including their base levels and special combat rules
 monster_cards = {
     "Babbage Cabbage": {
         "level": 1,
@@ -47,6 +49,7 @@ monster_cards = {
     }
 }
 
+# Dictionary defining equippable items, their combat bonuses, slots, restrictions, and gold value
 item_cards = {
     "Martini-Henry Rifle": {
         "slot": "2 Hands",
@@ -104,6 +107,7 @@ item_cards = {
     }
 }
 
+# Miscellaneous cards such as curses or one-time use treasures
 other_cards = {
     "Curse – Stripped Gear": {
         "type": "Curse",
@@ -115,6 +119,7 @@ other_cards = {
     }
 }
 
+# Master index combining all card categories for easy lookup during gameplay
 card_index = {
     "classes": class_cards,
     "monsters": monster_cards,
