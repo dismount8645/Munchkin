@@ -1,6 +1,12 @@
 # ============================
 # MAIN PROGRAM
 # ============================
+from game_modules.game_session import GameSession
+from game_modules.selection_menus import choose_gender, choose_class
+from game_modules.player import Player
+from game_modules.scoreboard import display_scoreboard
+from game_modules.card_index import card_index
+
 session = GameSession()
 
 start_game = input("Start game? (y/n): ").lower() == "y"
