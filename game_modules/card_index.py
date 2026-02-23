@@ -1,3 +1,7 @@
+from game_modules.deck import DoorCard, TreasureCard
+
+
+
 # ============================
 # CARD INDEX
 # ============================
