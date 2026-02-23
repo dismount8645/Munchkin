@@ -1,6 +1,6 @@
 # Current State vs. Game Plan
 
-This document compares the current implemented capabilities of the Munchkin game engine to the logic blueprint defined in `game_plan.md`.
+This document compares the current implemented capabilities of the Munchkin game engine to the logic blueprint defined in `master.md`.
 
 ## 1. The Variable Registry
 
