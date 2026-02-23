@@ -1,3 +1,4 @@
+from game_modules.combat_system import combat
 
 # ============================
 # GAME SESSION
