@@ -1,23 +1,36 @@
-draw_type = ["curse", "monster"]
-players = []
+# ============================
+# MAIN PROGRAM
+# ============================
+session = GameSession()
 
+start_game = input("Start game? (y/n): ").lower() == "y"
 
-class player:
-    def __init__(self, name):
-        self.name = name
-        self.hand_size = 0
-        self.level = 0
-        self.strength = 0
-        self.gender = None
-        self.player_class = None
+if start_game:
+    session.start_game()
 
-print("Welcome to the Munchkin game assistant!")
+    num_players_str = input("How many players? ")
+    if num_players_str.isdigit():
+        num_players = int(num_players_str)
+    else:
+        num_players = 0
 
-player_count = int(input("How many players are playing? "))
+    for i in range(num_players):
+        print(f"\n--- Player {i + 1} setup ---")
+        name = input("Enter player name: ")
+        gender = choose_gender()
+        pclass = choose_class()
 
-for i in range(player_count):
-    players.append(player(input(f"Enter name for player {i+1}: ")))
-print(f"Players: {[p.name for p in players]}")
+        new_player = Player(name, gender, pclass)
+        session.add_player(new_player)
 
+    display_scoreboard(session)
 
-    
+    # Example combat test:
+    if session.players:
+        print("\nTesting combat with Ada Loveless...")
+        # Pass the actual card_index dictionary
+        session.fight_monster(session.players[0].name, "Ada Loveless", card_index)
+
+else:
+    print("Game not started.")
+
