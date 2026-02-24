@@ -1,4 +1,12 @@
 from game_modules.combat_system import combat
+from game_modules.deck import Deck
+from game_modules.card_index import card_index    
+
+# Initialization of game objects
+
+door_deck = Deck(card_index.door_cards)
+treasure_deck = Deck(card_index.treasure_cards)
+
 
 # ============================
 # GAME SESSION
