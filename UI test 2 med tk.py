@@ -1,0 +1,157 @@
+import tkinter as tk
+from tkinter import ttk
+from tkinter import messagebox
+
+root = tk.Tk()
+
+class Player:
+    def __init__(self, name, level, strenght, p_class, gender):
+        self.name = name
+        self.level = int(level)
+        self.strength = int(strenght)
+        self.p_class = p_class
+        self.gender = gender
+
+    def change_level(self, amount):
+        if self.level + amount > 0:
+            self.level += amount
+
+    def change_strength(self, amount):
+        if self.strength + amount > 0:
+            self.strength += amount
+#==================
+#===SCOREBOARD=====
+#==================
+
+class ScoreboardApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Player Menu")
+
+        self.players = []
+
+        self.name_var = tk.StringVar()
+        self.level_var = tk.StringVar()
+        self.strenght_var = tk.StringVar()
+        self.p_class_var = tk.StringVar()
+        self.gender_var = tk.StringVar()
+
+        self.create_input_section()
+        self.create_table()
+        self.create_update_buttons()
+    #================================
+    # Input sektioner for nye spillere
+    #================================
+    def create_input_section(self):
+        frame = tk.Frame(self.root)
+        frame.pack(pady=10)
+
+        tk.Label(frame, text="Navn:").grid(row=0, column=0)
+        tk.Entry(frame, textvariable=self.name_var).grid(row=0, column=1)
+
+        tk.Label(frame, text="Class:").grid(row=3, column=0)
+        self.p_class_var.set("Vælg en")
+        self.p_class_combobox = ttk.Combobox(frame, textvariable=self.p_class_var, values=["Officer", "Mechanic", "Wizard", "Warrior", "Rogue"], state="readonly").grid(row=3, column=1)
+
+        tk.Label(frame, text="Gender:").grid(row=4, column=0)
+        self.gender_var.set("Vælg en")
+        self.gender_combobox = ttk.Combobox(frame, textvariable=self.gender_var, values=["Male", "Female"], state="readonly").grid(row=4, column=1)
+
+        tk.Button(frame, text="Tilføj spiller", command=self.add_player).grid(row=5, column=0, columnspan=2, pady=5)
+
+    #==================
+    # Tabel (Treeview)
+    #==================
+    def create_table(self):
+        columns = ("Navn", "Level", "Strength", "Class", "Gender")
+
+        self.table = ttk.Treeview(self.root, columns=columns, show="headings", height=8)
+
+        for col in columns:
+            self.table.heading(col, text=col)
+            self.table.column(col, width=100)
+
+        self.table.pack(pady=10)
+
+    #===============
+    # Tilføj spillere
+    #===============
+    def add_player(self):
+        name = self.name_var.get().strip()
+        p_class = self.p_class_var.get().strip()
+        gender = self.gender_var.get().strip()
+
+        # Tjek om felterne er udfyldt (hvis du tilføjer level/strength inputs, kan de også tilføjes her)
+        if not name or not p_class or name =="Vælg en" or gender =="Vælg en":
+            messagebox.showwarning("Fejl", "Udfyld venligst alle felter før du tilføjer en spiller!")
+            return
+
+        player = Player(
+            self.name_var.get(),
+            self.level_var.get() or 1,
+            self.strenght_var.get() or 0,
+            self.p_class_var.get(),
+            self.gender_var.get()
+        )
+
+        self.players.append(player)
+
+        self.table.insert("", "end", values=(
+            player.name,
+            player.level,
+            player.strength,
+            player.p_class,
+            player.gender
+        ))
+
+        # Ryd felter
+        self.name_var.set("")
+        self.level_var.set("")
+        self.strenght_var.set("")
+        self.p_class_var.set("")
+        self.gender_var.set("")
+#------------------------
+#Buttons to update stats
+#-----------------------
+    def create_update_buttons(self):
+        frame = tk.Frame(self.root)
+        frame.pack(pady=10)
+
+        tk.Button(frame, text="Level +", command=lambda: self.update_stat("level", +1)).grid(row=0, column=0)
+        tk.Button(frame, text="Level -", command=lambda: self.update_stat("level", -1)).grid(row=0, column=1)
+
+        tk.Button(frame, text="Strenght +", command=lambda: self.update_stat("strenght", +1)).grid(row=1, column=0)
+        tk.Button(frame, text="Strenght -", command=lambda: self.update_stat("strenght", -1)).grid(row=1, column=1)
+
+#----------------
+#Update stats
+#----------------
+    def update_stat(self, stat, amount):
+        selected = self.table.selection()
+        if not selected:
+            return
+        index = self.table.index(selected[0])
+        player = self.players[index]
+
+        if stat == "level":
+            player.change_level(amount)
+        elif stat == "strenght":
+            player.change_strength(amount)
+
+        self.refresh_table()
+
+#----------------
+#Refresh table
+#----------------
+    def refresh_table(self):
+        for row in self.get_children():
+            self.table.delete(row)
+
+        for p in self.players:
+            self.table.insert("", "end", values=(
+                p.name, p.level, p.strength, p.p_class, p.gender
+         ))
+
+
+app = ScoreboardApp(root)
+root.mainloop()
