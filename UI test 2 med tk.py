@@ -8,7 +8,7 @@ class Player:
     def __init__(self, name, level, strength, player_class, gender, gold):
         self.name = name
         self.level = int(level)
-        self.strength = int(strenght)
+        self.strength = int(strength)
         self.player_class = player_class
         self.gender = gender
         self.gold = gold
@@ -20,7 +20,7 @@ class Player:
     def change_strength(self, amount):
         if self.strength + amount > 0:
             self.strength += amount
- 
+placeholder_text = "Vælg en"
 #==================
 #===SCOREBOARD=====
 #==================
