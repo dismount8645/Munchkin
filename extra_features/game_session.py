@@ -1,6 +1,6 @@
-from game_modules.combat_system import combat
-from game_modules.deck import Deck
-from game_modules.card_index import card_index    
+from extra_features.combat_system import combat
+from extra_features.deck import Deck
+from extra_features.card_index import card_index    
 
 # Initialization of game objects
 
