@@ -12,8 +12,8 @@ Her er en mere struktureret og professionel version af dine noter, opdelt efter 
 
 ### 2. Stats & Standardværdier
 
-* **Level:** Starter som standard på **1**.
-* **Strength:** Starter på **0**.
+* **Level:** Starter som standard på **1**. DONE
+* **Strength:** Starter på **0**. DONE
 * **Guld:** Tilføj et felt/variabel til sporing af guld-beholdning.
 * **Justering:** Implementér **+/- knapper** til manuel justering af både Level, Strength og Gold.
 
