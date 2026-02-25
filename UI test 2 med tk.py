@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 
 root = tk.Tk()
 
@@ -42,10 +43,12 @@ class ScoreboardApp:
         tk.Entry(frame, textvariable=self.name_var).grid(row=0, column=1)
 
         tk.Label(frame, text="Class:").grid(row=3, column=0)
-        self.p_class_combobox = ttk.Combobox(frame, textvariable=self.p_class_var, values=["Officer", "Mechanic", "Wizard", "Warrior", "Rogue"]).grid(row=3, column=1)
+        self.p_class_var.set("Vælg en")
+        self.p_class_combobox = ttk.Combobox(frame, textvariable=self.p_class_var, values=["Officer", "Mechanic", "Wizard", "Warrior", "Rogue"], state="readonly").grid(row=3, column=1)
 
         tk.Label(frame, text="Gender:").grid(row=4, column=0)
-        self.gender_combobox = ttk.Combobox(frame, textvariable=self.gender_var, values=["Male", "Female"]).grid(row=4, column=1)
+        self.gender_var.set("Vælg en")
+        self.gender_combobox = ttk.Combobox(frame, textvariable=self.gender_var, values=["Male", "Female"], state="readonly").grid(row=4, column=1)
 
         tk.Button(frame, text="Tilføj spiller", command=self.add_player).grid(row=5, column=0, columnspan=2, pady=5)
 
@@ -67,6 +70,15 @@ class ScoreboardApp:
     # Tilføj spillere
     #===============
     def add_player(self):
+        name = self.name_var.get().strip()
+        p_class = self.p_class_var.get().strip()
+        gender = self.gender_var.get().strip()
+
+        # Tjek om felterne er udfyldt (hvis du tilføjer level/strength inputs, kan de også tilføjes her)
+        if not name or not p_class or name =="Vælg en" or gender =="Vælg en":
+            messagebox.showwarning("Fejl", "Udfyld venligst alle felter før du tilføjer en spiller!")
+            return
+
         player = Player(
             self.name_var.get(),
             self.level_var.get(),
