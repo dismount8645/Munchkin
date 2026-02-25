@@ -7,8 +7,8 @@ root = tk.Tk()
 class Player:
     def __init__(self, name, level, strength, player_class, gender, gold):
         self.name = name
-        self.level = int(level)
-        self.strength = int(strength)
+        self.level = level
+        self.strength = strength
         self.player_class = player_class
         self.gender = gender
         self.gold = gold
@@ -34,7 +34,7 @@ class ScoreboardApp:
 
         self.name_var = tk.StringVar()
         self.level_var = tk.StringVar()
-        self.strenght_var = tk.StringVar()
+        self.strength_var = tk.StringVar()
         self.player_class_var = tk.StringVar()
         self.gender_var = tk.StringVar()
         self.gold_var = tk.StringVar()
@@ -42,6 +42,7 @@ class ScoreboardApp:
         self.root.bind('<Return>', self.add_player)
         self.create_input_section()
         self.create_table()
+        self.create_update_buttons()
 
     #================================
     # Input sektioner for nye spillere
@@ -93,13 +94,14 @@ class ScoreboardApp:
         player = Player(
             self.name_var.get(),
             self.level_var.get(),
-            self.strenght_var.get(),
-            self.player_class_var.get(),
+            self.strength_var.get()or 1,
+            self.player_class_var.get() or 0,
             self.gender_var.get(),
             self.gold_var.get()
         )
 
         self.players.append(player)
+        self.refresh_table()
 
         self.table.insert("", "end", values=(
             player.name,
@@ -113,10 +115,44 @@ class ScoreboardApp:
         # Ryd felter
         self.name_var.set("")
         self.level_var.set("")
-        self.strenght_var.set("")
+        self.strength_var.set("")
         self.player_class_var.set(placeholder_text)
         self.gender_var.set(placeholder_text)
-#On button pushed command mangler
 
+#================
+#Knapper + -
+#===============
+    def create_update_buttons(self):
+        frame = tk.Frame(self.root)
+        frame.pack(pady=10)
+
+        tk.Button(frame, text="Level +", command=lambda: self.update_stat("level", +1)).grid(row=0, column=0)
+        tk.Button(frame, text="Level -", command=lambda: self.update_stat("level", -1)).grid(row=0, column=1)
+
+        tk.Button(frame, text="Strength +", command=lambda: self.update_stat("strength", +1)).grid(row=1, column=0)
+        tk.Button(frame, text="Strength -", command=lambda: self.update_stat("strength", -1)).grid(row=1, column=1)
+    def update_stat(self, stat, amount):
+        selected = self.table.selection()
+        if not selected:
+            return
+
+        index = self.table.index(selected[0])
+        player = self.players[index]
+
+        if stat == "level":
+            player.change_level(amount)
+        elif stat == "strength":
+            player.change_strength(amount)
+
+        self.refresh_table()
+
+    def refresh_table(self):
+        for row in self.table.get_children():
+            self.table.delete(row)
+
+        for p in self.players:
+            self.table.insert("", "end", values=(
+                p.name, p.level, p.strength, p.player_class, p.gender
+            ))
 app = ScoreboardApp(root)
 root.mainloop()
