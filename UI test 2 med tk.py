@@ -33,6 +33,7 @@ class ScoreboardApp:
         self.gender_var = tk.StringVar()
         self.gold_var = tk.StringVar()
 
+        self.root.bind('<Return>', self.add_player)
         self.create_input_section()
         self.create_table()
 
@@ -73,7 +74,7 @@ class ScoreboardApp:
     #===============
     # Tilføj spillere
     #===============
-    def add_player(self):
+    def add_player(self, event=None):
         name = self.name_var.get().strip()
         player_class = self.player_class_var.get().strip()
         gender = self.gender_var.get().strip()
