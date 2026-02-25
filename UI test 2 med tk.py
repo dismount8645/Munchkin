@@ -3,9 +3,6 @@ from tkinter import ttk
 
 root = tk.Tk()
 
-entry = tk.Entry(root, width=40)
-entry.pack()
-
 class Player:
     def __init__(self, name, level, strenght, p_class, gender):
         self.name = name
@@ -96,6 +93,5 @@ class ScoreboardApp:
         self.gender_var.set("")
 #On button pushed command mangler
 
-root = tk.Tk()
 app = ScoreboardApp(root)
 root.mainloop()
