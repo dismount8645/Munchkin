@@ -1,0 +1,33 @@
+Her er en mere struktureret og professionel version af dine noter, opdelt efter funktionalitet. Jeg har præciseret logikken, så det er nemmere at gå til, når du skal kode det.
+
+---
+
+## Kravspecifikation: Karakter-oprettelse og Logik
+
+### 1. Brugerflade (UI) & Input
+
+* **Dropdown-menuer:** "Class" og "Gender" skal vælges via dropdowns.
+* **Validering:** Alle felter skal være udfyldte, før formularen kan indsendes.
+* **UX-Optimering:** Implementér "Enter"-tast som genvej til at aktivere hovedknappen (f.eks. "Opret" eller "Gem").
+
+### 2. Stats & Standardværdier
+
+* **Level:** Starter som standard på **1**.
+* **Strength:** Starter på **0**.
+* **Guld:** Tilføj et felt/variabel til sporing af guld-beholdning.
+* **Justering:** Implementér **+/- knapper** til manuel justering af både Level, Strength og Gold.
+
+### 3. Spil-logik & Sortering
+
+* **Win Condition:** Spillet er vundet, når en karakter når **Level 10**.
+* **Sortering af liste:** Karakteroversigten skal sorteres efter følgende prioritering:
+1. **Level** (Højeste først).
+2. **Strength** (Højeste først, hvis Level er ens).
+
+
+
+---
+
+**Vil du have hjælp til at skrive koden til sorterings-funktionen eller opsætte valideringen af dropdown-felterne?**
+
+For at låse op for alle apps fulde funktionalitet skal du forresten aktivere [Gemini-appaktivitet](https://myactivity.google.com/product/gemini).
