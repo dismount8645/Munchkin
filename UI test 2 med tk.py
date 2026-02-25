@@ -2,15 +2,18 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 
+
+placeholder_text = "Vælg en"
 root = tk.Tk()
 
 class Player:
-    def __init__(self, name, level, strenght, p_class, gender):
+    def __init__(self, name, level, strength, player_class, gender, gold):
         self.name = name
         self.level = level
-        self.strength = strenght
-        self.p_class = p_class
+        self.strength = strength
+        self.player_class = player_class
         self.gender = gender
+        self.gold = gold
 
 #==================
 #===SCOREBOARD=====
@@ -26,8 +29,9 @@ class ScoreboardApp:
         self.name_var = tk.StringVar()
         self.level_var = tk.StringVar()
         self.strenght_var = tk.StringVar()
-        self.p_class_var = tk.StringVar()
+        self.player_class_var = tk.StringVar()
         self.gender_var = tk.StringVar()
+        self.gold_var = tk.StringVar()
 
         self.create_input_section()
         self.create_table()
@@ -43,11 +47,11 @@ class ScoreboardApp:
         tk.Entry(frame, textvariable=self.name_var).grid(row=0, column=1)
 
         tk.Label(frame, text="Class:").grid(row=3, column=0)
-        self.p_class_var.set("Vælg en")
-        self.p_class_combobox = ttk.Combobox(frame, textvariable=self.p_class_var, values=["Officer", "Mechanic", "Wizard", "Warrior", "Rogue"], state="readonly").grid(row=3, column=1)
+        self.player_class_var.set(placeholder_text)
+        self.player_class_combobox = ttk.Combobox(frame, textvariable=self.player_class_var, values=["Officer", "Mechanic", "Wizard", "Warrior", "Rogue"], state="readonly").grid(row=3, column=1)
 
         tk.Label(frame, text="Gender:").grid(row=4, column=0)
-        self.gender_var.set("Vælg en")
+        self.gender_var.set(placeholder_text)
         self.gender_combobox = ttk.Combobox(frame, textvariable=self.gender_var, values=["Male", "Female"], state="readonly").grid(row=4, column=1)
 
         tk.Button(frame, text="Tilføj spiller", command=self.add_player).grid(row=5, column=0, columnspan=2, pady=5)
@@ -71,11 +75,11 @@ class ScoreboardApp:
     #===============
     def add_player(self):
         name = self.name_var.get().strip()
-        p_class = self.p_class_var.get().strip()
+        player_class = self.player_class_var.get().strip()
         gender = self.gender_var.get().strip()
 
         # Tjek om felterne er udfyldt (hvis du tilføjer level/strength inputs, kan de også tilføjes her)
-        if not name or not p_class or name =="Vælg en" or gender =="Vælg en":
+        if not name or not player_class or name =="Vælg en" or gender =="Vælg en":
             messagebox.showwarning("Fejl", "Udfyld venligst alle felter før du tilføjer en spiller!")
             return
 
@@ -83,8 +87,9 @@ class ScoreboardApp:
             self.name_var.get(),
             self.level_var.get(),
             self.strenght_var.get(),
-            self.p_class_var.get(),
-            self.gender_var.get()
+            self.player_class_var.get(),
+            self.gender_var.get(),
+            self.gold_var.get()
         )
 
         self.players.append(player)
@@ -93,16 +98,17 @@ class ScoreboardApp:
             player.name,
             player.level,
             player.strength,
-            player.p_class,
-            player.gender
+            player.player_class,
+            player.gender,
+            player.gold
         ))
 
         # Ryd felter
         self.name_var.set("")
         self.level_var.set("")
         self.strenght_var.set("")
-        self.p_class_var.set("")
-        self.gender_var.set("")
+        self.player_class_var.set(placeholder_text)
+        self.gender_var.set(placeholder_text)
 #On button pushed command mangler
 
 app = ScoreboardApp(root)
