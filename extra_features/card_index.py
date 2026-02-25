@@ -1,4 +1,4 @@
-from game_modules.deck import DoorCard, TreasureCard
+from extra_features.deck import DoorCard, TreasureCard
 
 
 
