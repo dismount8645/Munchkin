@@ -7,11 +7,11 @@ root = tk.Tk()
 class Player:
     def __init__(self, name, level, strength, player_class, gender, gold):
         self.name = name
-        self.level = level
-        self.strength = strength
+        self.level = 1
+        self.strength = 0
         self.player_class = player_class
         self.gender = gender
-        self.gold = gold
+        self.gold = 0
         
     def change_level(self, amount):
         if self.level + amount > 0:
@@ -20,6 +20,11 @@ class Player:
     def change_strength(self, amount):
         if self.strength + amount > 0:
             self.strength += amount
+
+    def change_gold(self, amount):
+        if self.gold + amount > 0:
+            self.gold += amount
+            
 placeholder_text = "Vælg en"
 #==================
 #===SCOREBOARD=====
@@ -68,7 +73,7 @@ class ScoreboardApp:
     # Tabel (Treeview)
     #==================
     def create_table(self):
-        columns = ("Navn", "Level", "Strength", "Class", "Gender")
+        columns = ("Navn", "Level", "Strength", "Class", "Gender", "Gold")
 
         self.table = ttk.Treeview(self.root, columns=columns, show="headings", height=8)
 
@@ -85,6 +90,7 @@ class ScoreboardApp:
         name = self.name_var.get().strip()
         player_class = self.player_class_var.get().strip()
         gender = self.gender_var.get().strip()
+        gold = self.gold_var.get().strip()
 
         # Tjek om felterne er udfyldt (hvis du tilføjer level/strength inputs, kan de også tilføjes her)
         if not name or not player_class or name =="Vælg en" or gender =="Vælg en":
@@ -97,20 +103,11 @@ class ScoreboardApp:
             self.strength_var.get()or 1,
             self.player_class_var.get() or 0,
             self.gender_var.get(),
-            self.gold_var.get()
+            self.gold_var.get() or 0
         )
 
         self.players.append(player)
         self.refresh_table()
-
-        self.table.insert("", "end", values=(
-            player.name,
-            player.level,
-            player.strength,
-            player.player_class,
-            player.gender,
-            player.gold
-        ))
 
         # Ryd felter
         self.name_var.set("")
@@ -118,6 +115,9 @@ class ScoreboardApp:
         self.strength_var.set("")
         self.player_class_var.set(placeholder_text)
         self.gender_var.set(placeholder_text)
+        self.gold_var.set("")
+
+
 
 #================
 #Knapper + -
@@ -131,6 +131,10 @@ class ScoreboardApp:
 
         tk.Button(frame, text="Strength +", command=lambda: self.update_stat("strength", +1)).grid(row=1, column=0)
         tk.Button(frame, text="Strength -", command=lambda: self.update_stat("strength", -1)).grid(row=1, column=1)
+
+        tk.Button(frame, text="Gold +", command=lambda: self.update_stat("gold", +100)).grid(row=2, column=0)
+        tk.Button(frame, text="Gold -", command=lambda: self.update_stat("gold", -100)).grid(row=2, column=1)
+        
     def update_stat(self, stat, amount):
         selected = self.table.selection()
         if not selected:
@@ -143,6 +147,8 @@ class ScoreboardApp:
             player.change_level(amount)
         elif stat == "strength":
             player.change_strength(amount)
+        elif stat == "gold":
+            player.change_gold(amount)
 
         self.refresh_table()
 
@@ -152,7 +158,9 @@ class ScoreboardApp:
 
         for p in self.players:
             self.table.insert("", "end", values=(
-                p.name, p.level, p.strength, p.player_class, p.gender
+                p.name, p.level, p.strength, p.player_class, p.gender, p.gold
             ))
+
 app = ScoreboardApp(root)
 root.mainloop()
+
