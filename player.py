@@ -1,4 +1,3 @@
-from deck import Deck
 # ============================
 # PLAYER CLASS
 # ============================
@@ -14,3 +13,8 @@ class Player:
         self.player_class = player_class
         self.gold = gold
         self.gear = gear
+
+def add_player(self, player):
+    self.players.append(player)
+
+
