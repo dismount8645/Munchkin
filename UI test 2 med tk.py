@@ -2,19 +2,25 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 
-
-placeholder_text = "Vælg en"
 root = tk.Tk()
 
 class Player:
     def __init__(self, name, level, strength, player_class, gender, gold):
         self.name = name
-        self.level = level
-        self.strength = strength
+        self.level = int(level)
+        self.strength = int(strenght)
         self.player_class = player_class
         self.gender = gender
         self.gold = gold
+        
+    def change_level(self, amount):
+        if self.level + amount > 0:
+            self.level += amount
 
+    def change_strength(self, amount):
+        if self.strength + amount > 0:
+            self.strength += amount
+ 
 #==================
 #===SCOREBOARD=====
 #==================
