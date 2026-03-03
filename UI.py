@@ -41,7 +41,7 @@ def create_input_section():
     frame = tk.Frame(root_window)
     frame.pack(pady=10)
 
-    tk.Label(frame, text="Navn:").grid(row=0, column=0)
+    tk.Label(frame, text="Name:").grid(row=0, column=0)
     tk.Entry(frame, textvariable=name_var).grid(row=0, column=1)
 
     tk.Label(frame, text="Class:").grid(row=3, column=0)
@@ -52,11 +52,11 @@ def create_input_section():
     gender_var.set(placeholder_text)
     ttk.Combobox(frame, textvariable=gender_var, values=available_genders, state="readonly").grid(row=4, column=1)
 
-    tk.Button(frame, text="Tilføj spiller", command=add_player).grid(row=5, column=0, columnspan=2, pady=5)
+    tk.Button(frame, text="Add player", command=add_player).grid(row=5, column=0, columnspan=2, pady=5)
 
 def create_table():
     global table
-    columns = ("Navn", "Level", "Strength", "Class", "Gender", "Gold")
+    columns = ("Name", "Level", "Gear", "Strength", "Class", "Gender", "Gold")
 
     tree_frame = tk.Frame(root_window)
     tree_frame.pack(pady=10, fill=tk.BOTH, expand=True)
@@ -79,7 +79,7 @@ def add_player(event=None):
     gender = gender_var.get().strip()
 
     if player_class == placeholder_text or gender == placeholder_text or not logic.add_player(name, player_class, gender):
-        messagebox.showwarning("Fejl", "Udfyld venligst alle felter før du tilføjer en spiller!")
+        messagebox.showwarning("Error", "Please fill in all fields before adding a player!")
         return
 
     refresh_table()
@@ -95,8 +95,8 @@ def create_update_buttons():
     tk.Button(frame, text="Level +", command=partial(update_stat, "level", +1)).grid(row=0, column=0)
     tk.Button(frame, text="Level -", command=partial(update_stat, "level", -1)).grid(row=0, column=1)
 
-    tk.Button(frame, text="Strength +", command=partial(update_stat, "strength", +1)).grid(row=1, column=0)
-    tk.Button(frame, text="Strength -", command=partial(update_stat, "strength", -1)).grid(row=1, column=1)
+    tk.Button(frame, text="Gear +", command=partial(update_stat, "gear", +1)).grid(row=1, column=0)
+    tk.Button(frame, text="Gear -", command=partial(update_stat, "gear", -1)).grid(row=1, column=1)
 
     tk.Button(frame, text="Gold +", command=partial(update_stat, "gold", +100)).grid(row=2, column=0)
     tk.Button(frame, text="Gold -", command=partial(update_stat, "gold", -100)).grid(row=2, column=1)
@@ -120,5 +120,5 @@ def refresh_table():
 
     for p in logic.get_players():
         table.insert("", "end", values=(
-            p.name, p.level, p.strength, p.player_class, p.gender, p.gold
+            p.name, p.level, p.gear, p.strength, p.player_class, p.gender, p.gold
         ))
