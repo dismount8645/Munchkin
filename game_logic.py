@@ -12,7 +12,7 @@ class Player: # Defining the player class
         self.strength = self.level + self.gear
 
     def change_level(self, amount): # Changes the level of the player
-        if self.level >= 0 and self.level < 9:
+        if self.level >= 0 and self.level < 10:
             self.level += amount
         # elif self.level == 10:
             # Check for win
