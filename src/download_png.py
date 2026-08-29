@@ -1,3 +1,4 @@
+import pathlib
 import base64
 import zlib
 import urllib.request
@@ -43,7 +44,7 @@ flowchart TD
 """
 
 url = f"https://kroki.io/mermaid/png/{encode_kroki(mermaid_code)}"
-output_path = r"c:\Users\Jacob\Documents\Munchkin\game_flowchart.png"
+output_path = pathlib.Path(__file__).parent.parent / "docs" / "game_flowchart.png"
 
 try:
     print(f"Downloading from {url}")
@@ -54,3 +55,6 @@ try:
     print("Successfully saved game_flowchart.png with white background and no \\n!")
 except Exception as e:
     print(f"Error: {e}")
+
+
+
